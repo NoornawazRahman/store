@@ -1,7 +1,16 @@
 #!/bin/bash
 
+clear
 SEP="--------------------------------------------------------------------------------------"
+# Ensure we are inside a git repository
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "❌ Not inside a git repository."
+    exit 1
+fi
 
+# Move to repo root automatically
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT" || exit 1
 
 echo "$SEP"
 echo "📌 Current Git Status:"
